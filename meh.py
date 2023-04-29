@@ -71,31 +71,26 @@ class player_animation:
 
     def get_animation_sprite(self):
         """takes the sprite map and returns the sprite for the current animation state."""
-        # Check if attacking and if state is < 3 then go back to idle
-        if self.frame == 3 and (self.state == "up_attack" or self.state == "down_attack" or self.state == "left_attack" or self.state == "right_attack"):
-            self.frame = 0
-            self.state = self.before_attack_state
-            self.idle()
-            return self.load_sprite_map()[0]
 
-        print(self.state, self.frame)
-        # if self.state == "up_idle": 
         
-        if self.frame == 0:
-            # return the first sprite in the sprite map
-            self.frame += 1
-            return self.load_sprite_map()[0]
+
+        if True:# self.state == "up_idle": 
         
-        elif self.frame == 1:
-            # return the second sprite in the sprite map
-            self.frame += 1
-            return self.load_sprite_map()[1]
-        elif self.frame == 2:
-            # return the third sprite in the sprite map
-            self.frame = 0
-            return self.load_sprite_map()[2]
+            if self.frame == 0:
+                # return the first sprite in the sprite map
+                self.frame += 1
+                return self.load_sprite_map()[0]
+            elif self.frame == 1:
+                # return the second sprite in the sprite map
+                self.frame += 1
+                return self.load_sprite_map()[1]
+            elif self.frame == 2:
+                # return the third sprite in the sprite map
+                self.frame = 0
+                return self.load_sprite_map()[2]
         
         # elif self.state == "up_walk":
+
 
 
     
@@ -111,7 +106,8 @@ class player_animation:
         sprite_list = []
         for i in range(4):
             for j in range(3):
-                sprite = sprite_map.subsurface((j*16, i*16, 16, 16))
+                sprite = sprite_map.subsurface((j*64, i*64, 64, 64))
+
                 sprite_list.append(sprite)
         return sprite_list
     
