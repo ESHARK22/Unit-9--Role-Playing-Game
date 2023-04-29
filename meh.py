@@ -320,19 +320,19 @@ def main():
             player.walk()
             player_rect.move_ip(0, -5)
              
-        elif keys[pygame.K_DOWN]:
+        if keys[pygame.K_DOWN]:
             debug("[Main loop - Key Handler] Player is moving down")
             player.state = "down_idle"
             player.walk()
             player_rect.move_ip(0, 5)
 
-        elif keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT]:
             debug("[Main loop - Key Handler] Player is moving left")
             player.state = "left_idle"
             player.walk()
             player_rect.move_ip(-5, 0)
 
-        elif keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT]:
             debug("[Main loop - Key Handler] Player is moving right")
             player.state = "right_idle"
             player.walk()
