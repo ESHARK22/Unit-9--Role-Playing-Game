@@ -12,10 +12,15 @@ all_debug_tags = [
     "[open_sprite_map]",
     "[split_sprite_map]",
     "[get_animation_sprite]",
-    "[Main loop - Key Handler]"
+    "[Main loop - Key Handler]",
+    "[walk]",
 ]
 enabled_debug_tags = [
-
+    "[open_sprite_map]",
+    #"[split_sprite_map]",
+    #"[get_animation_sprite]",
+    #"[Main loop - Key Handler]",
+    "[walk]",
 ]
 def debug(message):
     """Prints a message to the console if the debug variable is set to True."""
@@ -23,11 +28,13 @@ def debug(message):
     # Debug messages go like [sommething] message or [something][something2] message
     # The first part is the debug tag, the second part is the message
 
-    msg = message.split("]")[-1:][0] # IDk why this works but it does
-    tag = message.split("]")[:-1][0] + "]" # HELP MEEEEEEEEEEEEEEEEEEEEEEEEE
-
+    # msg = message.split("]")[-1:][0] # IDk why this works but it does
+    # tag = message.split("]")[:-1][0] + "]" # HELP MEEEEEEEEEEEEEEEEEEEEEEEEE
+    message = str(message).split("]")
+    msg = message[-1:][0]
+    tag = message[:-1][0] + "]"
     if tag in enabled_debug_tags:
-        print(message)
+        print(msg)
     elif tag not in all_debug_tags:
         raise Exception(f"Debug tag {tag} not found in all_debug_tags")
 
@@ -130,12 +137,16 @@ class player_animation:
         """Changes the state of the player animation to a walking state."""
         if self.state == "up_idle":
             self.state = "up_walk"
+            debug(f"[walk] Changed state to {self.state}")
         elif self.state == "down_idle":
             self.state = "down_walk"
+            debug(f"[walk] Changed state to {self.state}")
         elif self.state == "left_idle":
             self.state = "left_walk"
+            debug(f"[walk] Changed state to {self.state}")
         elif self.state == "right_idle":
             self.state = "right_walk"
+            debug(f"[walk] Changed state to {self.state}")
 
     def idle(self):
         """Changes the state of the player animation to an idle state."""
@@ -180,60 +191,61 @@ class player_animation:
             self.frame += 1
 
 
-        debug("[get_animation_sprite][state] " + self.state)
+        debug("[get_animation_sprite][current_state] " + self.state)
 
         if self.state == "up_attack" and self.frame > 3:
             self.state = self.before_attack_state
             self.frame = 0
+            debug("[get_animation_sprite][new_state] " + self.state)
 
         elif self.state == "down_attack" and self.frame > 3:
             self.state = self.before_attack_state
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "left_attack" and self.frame > 3:
             self.state = self.before_attack_state
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "right_attack" and self.frame > 3:
             self.state = self.before_attack_state
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         # If the player is walking, and the frame number is > 4, then the player is done walking
         # and the player should return to the idle state
         elif self.state == "up_walk" and self.frame > 4:
             self.state = "up_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "down_walk" and self.frame > 4:
             self.state = "down_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "left_walk" and self.frame > 4:
             self.state = "left_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "right_walk" and self.frame > 4:
             self.state = "right_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         # If the player is idle, and the frame number is > 5, then the player is done idling
         # and the player should return to the idle state
         elif self.state == "up_idle" and self.frame > 5:
             self.state = "up_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "down_idle" and self.frame > 5:
             self.state = "down_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "left_idle" and self.frame > 5:
             self.state = "left_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         elif self.state == "right_idle" and self.frame > 5:
             self.state = "right_idle"
             self.frame = 0
-
+            debug("[get_animation_sprite][new_state] " + self.state)
         # If the player is attacking, then the frame number is the current frame modulo 3
         if self.state == "up_attack":
             frame_number = self.frame % 3
