@@ -30,6 +30,68 @@ pygame.display.set_caption("Eshark's rpg!")
 #endregion
 
 
+#region ------> Input handling <------
+
+def input_handler():
+    """ Handles input """
+    global running
+
+
+    for keys in pygame.event.get():
+        if keys.type == pygame.QUIT:
+            running = False
+            debug("InputHandler", "User closed the window")
+
+        if keys.type == pygame.KEYDOWN:
+            if keys.key == pygame.K_ESCAPE:
+                running = False
+                debug("InputHandler", "User pressed escape")
+
+            if keys.key == pygame.K_w:
+                debug("InputHandler", "User pressed W")
+
+            if keys.key == pygame.K_a:
+                debug("InputHandler", "User pressed A")
+
+            if keys.key == pygame.K_s:
+                debug("InputHandler", "User pressed S")
+
+            if keys.key == pygame.K_d:
+                debug("InputHandler", "User pressed D")
+
+        elif keys.type == pygame.KEYUP:
+            if keys.key == pygame.K_w:
+                debug("InputHandler", "User released W")
+
+            if keys.key == pygame.K_a:
+                debug("InputHandler", "User released A")
+
+            if keys.key == pygame.K_s:
+                debug("InputHandler", "User released S")
+
+            if keys.key == pygame.K_d:
+                debug("InputHandler", "User released D")
+
+
+
+
+#endregion
+
+
+#region ------> General functions <------
+def clear_screen():
+    """ Clears the screen. This is usually called at the start of the game loop to remove the previous
+        frame.                                                                                       """
+    window.fill((0, 0, 0))
+
+def update_screen():
+    """ Updates the screen. This is usually called at the end of the game loop to update the screen  
+        with the new frame. This is the opposite of clear_screen()                                  """
+    pygame.display.update()
+
+#endregion
+
+
 #region ------> Pygame game loop <------
 
 # Game loop variables
@@ -37,12 +99,16 @@ running = True
 
 # Game loop
 while running:
-    # Event loop
-    for event in pygame.event.get():
-        # Check if the user wants to quit
-        if event.type == pygame.QUIT:
-            # Set running to false to break the game loop
-            running = False
+    clear_screen() # Clear the screen
+
+    input_handler() # Handle input
+
+    
+
+
+    update_screen() # Update the screen
+
+
 
 #endregion
 
