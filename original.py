@@ -34,16 +34,8 @@ while True:
         spawn = randint(0,4)
 
     # Answer this in a comment - What does this block do?       
-    if spawn == 0:
-        opponent = "Mr Smith"
-    elif spawn == 1:
-        opponent = "Mr Cammack"
-    elif spawn == 2:
-        opponent = "Mr Birchall"
-    elif spawn == 3:
-        opponent = "Mr Soulsby"
-    else:
-        opponent = "Lord Timmins of Mobberley"
+    teachers = ["Mr Smith", "Mr Cammack", "Mr Birchall", "Mr Soulsby", "Lord Timmins of Mobberley"]
+    opponent = teachers[spawn]
 
     # Answer this in a comment - What does this block do?
     print("\n")
