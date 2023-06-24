@@ -224,3 +224,23 @@ with open("leaderboard.json", "w", encoding="UTF-8") as leaderboard_file:
 #endregion User - Initialisation
 
 
+teachers = {
+    "Mr Smith": {
+        "Subject": "electronics",
+        "Health": 100,
+        "Attack": 10,
+        "Defence": 20,
+    },
+    "Mr Cammack": {
+        "Subject": "pe",
+        "Health": 120,
+        "Attack": 15,
+        "Defence": 15,
+    },
+    "Mr Birchall": {
+        "Subject": "EVERYTHING",
+        "Health": 150,
+        "Attack": 20,
+        "Defence": 10,
+    },
+}
