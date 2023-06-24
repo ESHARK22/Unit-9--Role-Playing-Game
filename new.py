@@ -230,17 +230,44 @@ teachers = {
         "Health": 100,
         "Attack": 10,
         "Defence": 20,
-    },
+        },
     "Mr Cammack": {
         "Subject": "pe",
         "Health": 120,
         "Attack": 15,
         "Defence": 15,
-    },
+        },
     "Mr Birchall": {
         "Subject": "EVERYTHING",
         "Health": 150,
         "Attack": 20,
         "Defence": 10,
-    },
+        },
 }
+
+students = {
+    "John": {
+        "Health": 150,
+        "Attack": 10,
+        "Defence": 25
+        },
+
+    "Ogo": {
+        "Health": 120,
+        "Attack": 15,
+        "Defence": 20
+        },
+
+    "Eli": {
+        "Health": 100,
+        "Attack": 20,
+        "Defence": 15
+        },
+
+    "Thomas": {
+        "Health": 80,
+        "Attack": 25,
+        "Defence": 10
+        }
+}
+
