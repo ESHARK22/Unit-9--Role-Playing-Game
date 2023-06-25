@@ -20,7 +20,11 @@
         "score": "1"
     },
     "ishaaq": {
-        "password": "no",
+        "password": "yes",
+        "score": "0"
+    },
+    "ish": {
+        "password": "yes",
         "score": "0"
     }
 }
