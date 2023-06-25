@@ -2,8 +2,8 @@ import json
 from random import randint
 from random import choice as random_choice
 from time import sleep
-import winsound
-
+# import winsound
+# 
 
 #---------------------------Sound----------------------------------------
 def play_sound(sound_file, repeat=False):
@@ -206,7 +206,46 @@ with open("leaderboard.json", "w", encoding="UTF-8") as leaderboard_file:
     leaderboard_file.write(json.dumps(leaderboard, indent=4))
 
 #endregion User - Initialisation
+# Ascii taken from https://ascii.co.uk/art/stickman
+teacher_ascii = [
+    """ 
+    _\|/^
+    (_oo
+    |     
+    /|\\
+    |
+    LL
+    """,
 
+    """
+    _\|/^
+    (_oo  -oi!
+    |
+    |__i
+    """,
+
+    """
+      _\|/^
+     (_oo /
+    /-|--/
+    \ |
+      /--i
+     /   L
+     L
+    """,
+    """
+    
+    """
+]
+
+student_cartwheel = """
+ o   \ o /  _ o         __|    \ /     |__        o _  \ o /   o
+/|\    |     /\   ___\o   \o    |    o/    o/__   /\     |    /|\
+/ \   / \   | \  /)  |    ( \  /o\  / )    |  (\  / |   / \   / \
+"""
+
+for line in student_cartwheel.split("\n"):
+    fancy_print(line, Colours.RED, True, wait_time=0.5)
 
 teachers = {
     "Mr Smith": {
@@ -214,20 +253,21 @@ teachers = {
         "Health": 100,
         "Attack": 10,
         "Defence": 20,
-        "Ascii": """
-        """
+        "ascii": random_choice(teacher_ascii)
         },
     "Mr Cammack": {
         "Subject": "pe",
         "Health": 120,
         "Attack": 15,
         "Defence": 15,
+        "ascii": random_choice(teacher_ascii)
         },
     "Mr Birchall": {
         "Subject": "EVERYTHING",
         "Health": 150,
         "Attack": 20,
         "Defence": 10,
+        "ascii": random_choice(teacher_ascii)
         },
 }
 
@@ -287,6 +327,7 @@ while True:
 
 user_score = 0
 def main_game_loop():
+    global user_score
     # Main game loop. 
 
     # Print player's health, attack and defence and score
@@ -302,9 +343,9 @@ def main_game_loop():
     # Randomly choose a teacher
     teacher_name = random_choice(list(teachers.keys()))
     teacher_stats = teachers[teacher_name]
-
+    fancy_print("You have encountered " + teacher_name + "!", Colours.RED, True, wait_time=0.5)
+    fancy_print(teacher_stats["ascii"], Colours.RED, True, wait_time=0.5)
     # Print the teacher's name, health, attack and defence
-    fancy_print(f"{teacher_name} has appeared!", Colours.RED, True, wait_time=0.5)
     fancy_print(" > Health: " + str(teacher_stats["Health"]), Colours.GREEN, True, wait_time=0.2)
     fancy_print(" > Attack: " + str(teacher_stats["Attack"]), Colours.RED, True, wait_time=0.2)
     fancy_print(" > Defence: " + str(teacher_stats["Defence"]), Colours.BLUE, True, wait_time=0.2)
@@ -343,11 +384,13 @@ def main_game_loop():
         teacher_stats["Health"] -= student_to_teacher_damage
         user_student["Health"] -= teacher_to_student_damage
 
+        total_damage = student_to_teacher_damage + teacher_to_student_damage
+        user_score += total_damage
+
         # Check if the teacher's health is less than or equal to 0
         if teacher_stats["Health"] <= 0:
             # If the teacher's health is less than or equal to 0, print a success message
             fancy_print("You killed " + teacher_name + "!", Colours.GREEN, True, wait_time=0.5)
-            user_score += 1
             teachers.pop(teacher_name)
             
 
@@ -360,7 +403,7 @@ def main_game_loop():
     else:
         # If the user wants to run, print a message
         fancy_print("You ran away!", Colours.GREEN, True, wait_time=0.5)
-        user_score -= 1
+        user_score -= 10
         
 
 while True:
