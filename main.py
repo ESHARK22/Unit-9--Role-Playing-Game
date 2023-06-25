@@ -62,6 +62,21 @@ def fancy_input(text: str, colour: Colours = Colours.RESET, bold: bool = False, 
 
     return input(colour + (Colours.BOLD if bold else "") + (Colours.UNDERLINE if underline else "") + text + Colours.RESET)
 
+def fancy_input_int(text: str, colour: Colours = Colours.RESET, bold: bool = False, underline: bool = False, wait_time: int = 0) -> int:
+    while True:
+        try:
+            return int(fancy_input(text, colour, bold, underline, wait_time))
+        except ValueError:
+            fancy_print("Please enter a valid number!", Colours.RED, True, wait_time=0.5)
+
+def fancy_input_str(text: str, colour: Colours = Colours.RESET, bold: bool = False, underline: bool = False, wait_time: int = 0) -> str:
+    while True:
+        try:
+            return str(fancy_input(text, colour, bold, underline, wait_time))
+        except ValueError:
+            fancy_print("Please enter a valid string!", Colours.RED, True, wait_time=0.5)
+
+
 
 def print_logo():
     fancy_print("Welcome to...", Colours.RED, bold=True, wait_time=1)
@@ -112,15 +127,8 @@ for name in leaderboard:
 #endregion Leaderboard - Initialisation
 
 #region User - Initialisation
-while True:
-    try:
-        # Try to get the user's name and turn it into a string
-        user_name = str(fancy_input("What is your name? ", Colours.GREEN, True, wait_time=0.5))
-        break
-    except ValueError:
-        # If the user's name is not a string, print an error message
-        fancy_print("Please enter a valid name", Colours.RED, True, wait_time=0.5)
 
+user_name = fancy_input_str("What is your name? ", Colours.GREEN, True, wait_time=0.5)
 
 # Has the user played before?
 if user_name in leaderboard:
@@ -128,14 +136,7 @@ if user_name in leaderboard:
     fancy_print("Welcome back " + user_name + "!", Colours.BLUE , True, wait_time=0.5)
 
     # Check if the user has the correct password
-    while True:
-        try:
-            # Try to get the user's password and turn it into a string
-            user_password = str(fancy_input("What is your password? ", Colours.GREEN, True, wait_time=0.5))
-            break
-        except ValueError:
-            # If the user's password is not a string, print an error message
-            fancy_print("Please enter a valid password", Colours.RED, True, wait_time=0.5)
+    user_password = fancy_input_str("What is your password? ", Colours.GREEN, True, wait_time=0.5)
 
     # Check if the user's password is correct
     if user_password == leaderboard[user_name]["password"]:
@@ -143,28 +144,12 @@ if user_name in leaderboard:
         fancy_print("Password correct!", Colours.GREEN, True, wait_time=0.5)
 
         # Check if the user wants to change their password
-        while True:
-            try:
-                # Try to get the user's answer and turn it into a string
-                change_password = str(fancy_input("Do you want to change your password? (y/n) ", Colours.GREEN, True, wait_time=0.5))
-                break
-            except ValueError:
-                # If the user's answer is not a string, print an error message
-                fancy_print("Please enter a valid answer", Colours.RED, True, wait_time=0.5)
-
-
+        change_password = fancy_input_str("Do you want to change your password? (y/n) ", Colours.GREEN, True, wait_time=0.5)
 
         # Check if the user wants to change their password
         if change_password == "y":
             # If the user wants to change their password, ask them for their new password
-            while True:
-                try:
-                    # Try to get the user's new password and turn it into a string
-                    new_password = str(fancy_input("What is your new password? ", Colours.GREEN, True, wait_time=0.5))
-                    break
-                except ValueError:
-                    # If the user's new password is not a string, print an error message
-                    fancy_print("Please enter a valid password", Colours.RED, True, wait_time=0.5)
+            new_password = fancy_input_str("What is your new password? ", Colours.GREEN, True, wait_time=0.5)
 
             # Change the user's password
             leaderboard[user_name]["password"] = new_password
@@ -172,14 +157,7 @@ if user_name in leaderboard:
             fancy_print("Password changed!", Colours.GREEN, True, wait_time=0.5)
 
         # Check if the user wants to play the game
-        while True:
-            try:
-                # Try to get the user's answer and turn it into a string
-                play_game = str(fancy_input("Do you want to play the game? (y/n)  > ", Colours.GREEN, True, wait_time=0.5))
-                break
-            except ValueError:
-                # If the user's answer is not a string, print an error message
-                fancy_print("Please enter a valid answer", Colours.RED, True, wait_time=0.5)
+        play_game = fancy_input_str("Do you want to play the game? (y/n) ", Colours.GREEN, True, wait_time=0.5)
 
         # Check if the user wants to play the game
         if play_game == "y":
@@ -202,14 +180,7 @@ else:
     fancy_print("Welcome " + user_name + "!", Colours.BLUE , True, wait_time=0.5)
 
     # Get the user's password
-    while True:
-        try:
-            # Try to get the user's password and turn it into a string
-            user_password = str(fancy_input("Enter a new password >", Colours.GREEN, True, wait_time=0.5))
-            break
-        except ValueError:
-            # If the user's password is not a string, print an error message
-            fancy_print("Please enter a valid password", Colours.RED, True, wait_time=0.5)
+    user_password = fancy_input_str("What is your password? ", Colours.GREEN, True, wait_time=0.5)
 
     # Add the user to the leaderboard
     leaderboard[user_name] = {"password": user_password, "score": "0"}
@@ -217,14 +188,7 @@ else:
     fancy_print("User added!", Colours.GREEN, True, wait_time=0.5)
 
     # Check if the user wants to play the game
-    while True:
-        try:
-            # Try to get the user's answer and turn it into a string
-            play_game = str(fancy_input("Do you want to play the game? (y/n)  > ", Colours.GREEN, True, wait_time=0.5))
-            break
-        except ValueError:
-            # If the user's answer is not a string, print an error message
-            fancy_print("Please enter a valid answer", Colours.RED, True, wait_time=0.5)
+    play_game = fancy_input_str("Do you want to play the game? (y/n) ", Colours.GREEN, True, wait_time=0.5)
 
     # Check if the user wants to play the game
     if play_game == "y":
@@ -311,17 +275,11 @@ for student in students:
 while True:
     try:
         # Try to get the user's answer and turn it into a string
-        user_student_input = str(fancy_input("Which student do you want to be? ", Colours.GREEN, True, wait_time=0.5))
-
-
+        user_student_input = fancy_input_str("Which student do you want to be? ", Colours.GREEN, True, wait_time=0.5)
         user_student = students[user_student_input] # Set user_student to the student's stats. Should raise a KeyError if the user's answer is not a valid student
         # If the user's answer is a valid student, print a success message
         fancy_print("You are now " + user_student_input + "!", Colours.GREEN, True, wait_time=0.5)
         break
-
-    except ValueError:
-        # If the user's answer is not a string, print an error message
-        fancy_print("Please enter a valid student!", Colours.RED, True, wait_time=0.5)
     except KeyError:
         # If the user's answer is not a valid student, print an error message
         fancy_print("Please enter a valid student!", Colours.RED, True, wait_time=0.5)
@@ -391,13 +349,13 @@ def main_game_loop():
             fancy_print("You killed " + teacher_name + "!", Colours.GREEN, True, wait_time=0.5)
             user_score += 1
             teachers.pop(teacher_name)
-            break
+            
 
         # Check if the student's health is less than or equal to 0
         if user_student["Health"] <= 0:
             # If the student's health is less than or equal to 0, print a failure message
             fancy_print("You died!", Colours.RED, True, wait_time=0.5)
-            break
+            
 
     else:
         # If the user wants to run, print a message
