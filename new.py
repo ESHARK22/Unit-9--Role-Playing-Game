@@ -2,6 +2,19 @@ import json
 from random import randint
 from random import choice as random_choice
 from time import sleep
+import winsound
+
+
+#---------------------------Sound----------------------------------------
+def play_sound(sound_file, repeat=False):
+    
+    # Stop all other sounds
+    winsound.PlaySound(None, winsound.SND_PURGE)
+    # Play the sound
+    winsound.PlaySound(sound_file, winsound.SND_ASYNC | winsound.SND_LOOP if repeat else winsound.SND_ASYNC)
+
+# class sounds:
+#     EXIT = winsound.
 
 #region fancy_print and fancy_input functions and Colors class
 
