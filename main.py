@@ -110,12 +110,12 @@ users = []
 for user in leaderboard:
     users.append(user)
 
-
 # Sort the leaderboard by score using bubble sort
 for i in range(len(leaderboard)):
-    for j in range(len(leaderboard) - i - 1):
-        if leaderboard[users[j]]["score"] < leaderboard[users[j + 1]]["score"]:
+    for j in range(len(leaderboard) - 1):
+        if int(leaderboard[users[j]]["score"]) < int(leaderboard[users[j + 1]]["score"]):
             leaderboard[users[j]], leaderboard[users[j + 1]] = leaderboard[users[j + 1]], leaderboard[users[j]]
+            users[j], users[j + 1] = users[j + 1], users[j]
 
 
 #region Print the leaderboard
