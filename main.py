@@ -6,6 +6,9 @@ from time import sleep
 # 
 
 #---------------------------Sound----------------------------------------
+
+# sound was not enabled in the final version of the game as i was using mainly linux for the game development, and windows requires a different library to play sounds.
+# In theory, the code below should work on windows, but i have not tested it, and therefore i have not enabled sound in the final version of the game.
 def play_sound(sound_file, repeat=False):
     
     # Stop all other sounds
