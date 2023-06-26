@@ -419,13 +419,13 @@ while True:
 fancy_print("Your score is " + str(user_score), Colours.GREEN, True, wait_time=0.5)
 
 # Check if the user's score is greater than the lowest score on the leaderboard
-if user_score > leaderboard[user_name]["score"]:
+if user_score > int(leaderboard[user_name]["score"]):
     fancy_print("You beat your high score!", Colours.GREEN, True, wait_time=0.5)
     # If the user's score is greater than the lowest score on the leaderboard, print a success message
     fancy_print("You made it onto the leaderboard!", Colours.GREEN, True, wait_time=0.5)
 
     # Add the user to the leaderboard
-    leaderboard[user_name] = {"password": user_password, "score": user_score}
+    leaderboard[user_name] = {"password": user_password, "score": str(user_score)}
     # Print a success message
     fancy_print("User added!", Colours.GREEN, True, wait_time=0.5)
     
